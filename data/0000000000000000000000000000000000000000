@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" /><title>file.0x01.me</title></head><body>
+<form action="/upload" method="post" enctype="multipart/form-data">
+<input type="file" name="file" />
+<input type="submit" name="submit" value="Submit" />
+</form>
+<p><a href='http://file.0x01.me/'>file.0x01.me</a>是一个匿名文件存储服务，用户上传的文件会被计算出SHA-1值，可以使用完整哈希值或唯一性前缀来下载，也可以制作出各种适合给别人分享的URL。</p>
+<p>支持的URL格式为：<code>http://file.0x01.me/&lt;HASH&gt;[/[&lt;FILENAME&gt;]][?type=&lt;TYPE&gt;]</code></p>
+<ul><li>
+<code>HASH</code>为完整哈希值或唯一性前缀，用来指明要下载的文件；</li>
+<li>
+<code>FILENAME</code>为任意文件名，一般浏览器会将下载的文件以此命名；</li>
+<li>
+<code>TYPE</code>为任意MIME类型，服务器将作为<code>Content-Type</code>头返回。如果未指定，响应头将不包含该信息。</li>
+</ul>
+<p>如果提交的哈希值短于10位，或者不能唯一性确定一个文件，服务器将返回<code>300 Multiple Choices</code>错误码。为了避免对服务器进行扫描文件攻击，响应中只会简单地列出增加一位后缀可能得到的16种URL。</p>
+</body></html>
