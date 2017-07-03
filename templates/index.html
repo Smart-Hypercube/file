@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8" /><title>file.0x01.me</title></head><body>
-<form action="/upload" method="post" enctype="multipart/form-data">
+<html><head><meta charset="utf-8" /><title>file.0x01.me{{ namespace }}</title></head><body>
+<form action="{{ namespace }}" method="post" enctype="multipart/form-data">
 <input type="file" name="file" />
 <input type="submit" name="submit" value="Submit" />
 </form>
 <p><a href='http://file.0x01.me/'>file.0x01.me</a>是一个匿名文件存储服务，用户上传的文件会被计算出SHA-1值，可以使用完整哈希值或唯一性前缀来下载，也可以制作出各种适合给别人分享的URL。</p>
+<p>您正要上传文件至“{{ namespace }}”名字空间，请注意除了“/”名字空间以外，其他名字空间所包含的文件都可以被列出且无法删除。因此如果您希望保密，请上传至“/”名字空间或选择一个别人无法猜到的名字空间。</p>
 <p>支持的URL格式为：<code>http://file.0x01.me/&lt;HASH&gt;[/[&lt;FILENAME&gt;]][?type=&lt;TYPE&gt;]</code></p>
 <ul><li>
 <code>HASH</code>为完整哈希值或唯一性前缀，用来指明要下载的文件；</li>

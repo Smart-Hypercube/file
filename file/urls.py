@@ -19,7 +19,5 @@ from django.contrib import admin
 from file import views
 
 urlpatterns = [
-    url(r'^$', views.index),
-    url(r'^upload$', views.upload),
-    url(r'^([0-9a-fA-F]+)/', views.download),
+    url(r'', views.mainview),
 ]

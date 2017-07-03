@@ -12,9 +12,11 @@
         <p>系统#+6*@已从崩5-/+36(-溃中恢复，检测到#7+*@5v/个文件丢失</p>
         <p>给用户卖个萌以示歉意，喵～</p>
     {% endifequal %}
-    <p>Full link: <a href="http://file.0x01.me/{{ hash_value }}">file.0x01.me/{{ hash_value }}</a></p>
-    <p>Full link with filename: <a href="http://file.0x01.me/{{ hash_value }}/{{ name }}">file.0x01.me/{{ hash_value }}/{{ name }}</a></p>
-    <p>Short link (maybe not work!): <a href="http://file.0x01.me/{{ hash_value|slice:"10" }}">file.0x01.me/{{ hash_value|slice:"10" }}</a></p>
-    <p>Short link with filename (maybe not work!): <a href="http://file.0x01.me/{{ hash_value|slice:"10" }}/{{ name }}">file.0x01.me/{{ hash_value|slice:"10" }}/{{ name }}</a></p>
+    <p>Share for downloading: <a href="http://file.0x01.me/{{ hash_value }}/{{ name }}?type=application/octet-stream">file.0x01.me/{{ hash_value }}/{{ name }}?type=application/octet-stream</a></p>
+    {% ifnotequal type '' %}
+        <p>Share for viewing: <a href="http://file.0x01.me/{{ hash_value }}/{{ name }}?type={{ type }}">file.0x01.me/{{ hash_value }}/{{ name }}?type={{ type }}</a></p>
+    {% endifnotequal %}
+    <p>Share for reading: <a href="http://file.0x01.me/{{ hash_value }}/{{ name }}?type=text/plain">file.0x01.me/{{ hash_value }}/{{ name }}?type=text/plain</a></p>
+    <p>I just want a short link: <a href="http://file.0x01.me/{{ hash_value|slice:"10" }}">file.0x01.me/{{ hash_value|slice:"10" }}</a></p>
 </body>
 </html>
