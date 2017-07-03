@@ -1,9 +1,11 @@
+import os
 from os import listdir
 from hashlib import sha1 as hash_method
 
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 
 data_dir = '/data/file'
 hash_len = hash_method().digest_size * 2
@@ -83,14 +85,14 @@ def mainview(request):
                 dest.write(chunk)
         if request.path != '/':
             if not os.fork():
-                os.execlp('mkdir', 'mkdir', '-p', data_dir + request.path)
+                os.execlp('mkdir', 'mkdir', '-p', data_dir + request.path.rpartition('/')[0])
                 exit()
             os.wait()
             with open(data_dir + request.path, 'a') as namespace:
                 namespace.write('<li><a href="/%s/%s">%s/%s</a></li>\n' %
                         (hash_value, f.name, hash_value, f.name))
         postfix = f.name.split('.')[-1].lower()
-        guess_type = guess_table.get_default(postfix, '')
+        guess_type = guess_table.get(postfix, '')
         return render(request, 'upload.html',
                 {'hash_value': hash_value, 'name': f.name, 'type': guess_type})
     else:
@@ -102,12 +104,16 @@ def mainview(request):
             if len(request.path) == hash_len + 1:
                 sep = path.find('/')
                 return redirect('/' + path[:sep].lower() + path[sep:], permanent=True)
-            return render(request, 'index.html', {namespace: request.path})
+            return render(request, 'index.html', {'namespace': request.path,
+                    'list': '/data/file' + request.path})
+        hash_value = request.path.split('/')[1]
         if len(hash_value) < 10:
-            return render(request, 'index.html', {namespace: request.path})
+            return render(request, 'index.html', {'namespace': request.path,
+                    'list': '/data/file' + request.path})
         l = list(filter(lambda s: s.startswith(hash_value) and len(s) == hash_len,
                 listdir(data_dir)))
         if len(l) == 1:
             sep = path.find('/')
             return redirect('/' + l[0] + path[sep:], permanent=False)
-        return render(request, 'index.html', {namespace: request.path})
+        return render(request, 'index.html', {'namespace': request.path,
+                'list': '/data/file' + request.path})
