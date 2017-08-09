@@ -12,16 +12,16 @@
     {% if alias_r %}
         <p>Link for downloading:
             <a href="http://file.0x01.me/{{ alias }}{{ ext }}?type=application/octet-stream">
-            file.0x01.me/{{ alias }}{{ ext }}?type=application/octet-stream
+            file.0x01.me/{{ alias }}?type=application/octet-stream
             </a></p>
         {% if mime %}
             <p>Link for previewing:
                 <a href="http://file.0x01.me/{{ alias }}{{ ext }}?type={{ mime }}">
-                file.0x01.me/{{ alias }}{{ ext }}?type={{ mime }}</a></p>
+                file.0x01.me/{{ alias }}?type={{ mime }}</a></p>
         {% endif %}
         <p>Link for reading:
             <a href="http://file.0x01.me/{{ alias }}{{ ext }}?type=text/plain">
-            file.0x01.me/{{ alias }}{{ ext }}?type=text/plain</a></p>
+            file.0x01.me/{{ alias }}?type=text/plain</a></p>
         <p>I just want a short link:
             <a href="http://file.0x01.me/{{ alias }}">
             file.0x01.me/{{ alias }}</a></p>
