@@ -3,14 +3,8 @@ server {
     server_name file.0x01.me;
     access_log /var/log/nginx/file/access.log;
     error_log /var/log/nginx/file/error.log;
-    location ~ "^/([0-9a-f]{2})([0-9a-f]{38}).+" {
-        root /data/file;
-        try_files /$1/$2 =404;
-        default_type "";
-        add_header Content-Type $arg_type;
-    }
-    location ~ "^/([0-9a-f]{2})([0-9a-f]{38})$" {
-        if ($arg_type = "") {
+    location ~ "^/([0-9a-f]{2})([0-9a-f]{8}[0-9a-f]*)(.*)" {
+        if ($3 = "" && $arg_type = "") {
             rewrite ^ $uri?type=application/octet-stream last;
         }
         root /data/file;
@@ -27,7 +21,7 @@ server {
     location = /favicon.ico {
         root /data/file/static;
     }
-    location / {
+    location = / {
         proxy_pass http://localhost:8000/;
         proxy_set_header Host $host:$server_port;
         proxy_set_header X-Read-IP $remote_addr;

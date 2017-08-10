@@ -2,24 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>file.0x01.me{% if alias %}/{{ alias }}{% endif %}</title>
+    <title>file.0x01.me</title>
 </head>
 <body>
-    <form action="/{{ alias }}" method="post" enctype="multipart/form-data">
+    <form action="/" method="post" enctype="multipart/form-data">
         <input type="file" name="file" />
         <input type="submit" name="submit" value="Upload" />
     </form>
     <p><a href="http://file.0x01.me/">file.0x01.me</a> is an anonymous file
         storage service. You can download any file uploaded here via its
         SHA-1 value.</p>
-    {% if alias %}
-        <p>Be careful! You are going to upload to the alias "{{ alias }}",
-            which means that anyone can access your file via
-            "file.0x01.me/{{ alias }}", instead of the SHA-1 value, in the
-            next 24 hours.</p>
-        <p>If you don't want others find your file easily, you should
-            upload it <a href="http://file.0x01.me/">here</a>.</p>
-    {% endif %}
     <p>If you have any suggestions or questions,
         <a href="mailto:hypercube+file@0x01.me">send me an email</a>.</p>
 </body>
